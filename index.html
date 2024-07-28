@@ -1,23 +1,104 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css"
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Encriptador de Texto</title>
-</head>
-<body>
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  </head>
+  <body>
     <div class="container">
-        <div class="logo">
-        </div>
-        <div class="left">
+      <img src="src/Imágenes/Logo.png" alt="logo" id="Logo" />
+      <div class="encriptar">
+        <textarea
+          name="texto"
+          class="texto"
+          id="texto"
+          cols="30"
+          rows="10"
+          placeholder="Ingresa el texto aquí"
+        ></textarea>
 
+        <div class="terminos">
+          <p>Solo letras minúsculas y sin acentos.</p>
         </div>
-        <div class="right">
-            
+        <div class="botones">
+          <button class="btn-encriptar" type="button" onclick="encriptar()">
+            Encriptar
+          </button>
+          <input
+            type="button"
+            class="btn-desencriptar"
+            value="Desencriptar"
+            onclick="desencriptar()"
+          />
         </div>
+      </div>
+      <div class="encriptado">
+        <img src="src/Imágenes/muñeco.png" alt="hombre sentado" id="muñeco" />
+        <div class="mensaje-encriptado" id="mensaje-encriptado">
+          <h2 id="titulo-mensaje">Ningún mensaje fue encontrado</h2>
+          <p id="parrafo">
+            Ingresa el texto que deseas encriptar o desencriptar
+          </p>
+        </div>
+      </div>
     </div>
+    <script>
+      function encriptar() {
+        let texto = document.getElementById("texto").value;
+        let tituloMensaje = document.getElementById("titulo-mensaje");
+        let parrafo = document.getElementById("parrafo");
+        let muñeco = document.getElementById("muñeco");
 
-    <footer>By Alejandro Moreno</footer>
-    
-</body>
+        let textoCifrado = texto
+          .replace(/e/gi, "enter")
+          .replace(/i/gi, "imes")
+          .replace(/a/gi, "ai")
+          .replace(/o/gi, "ober")
+          .replace(/u/gi, "ufat");
+
+        if (texto.length != 0) {
+          document.getElementById("texto").value = textoCifrado;
+          tituloMensaje.textContent = "Texto encriptado con éxito";
+          parrafo.textContent = "";
+          muñeco.src = "./src/Imágenes/muñeco.png";
+        } else {
+          muñeco.src = "./src/Imágenes/muñeco.png";
+          tituloMensaje.textContent = "Ningún mensaje fue encontrado";
+          parrafo.textContent = "Ingresa el texto que deseas encriptar o desencriptar";
+          swal("Ooops!", "Debes ingresar un texto", "warning");
+        }
+      }
+
+      function desencriptar() {
+        let texto = document.getElementById("texto").value;
+        let tituloMensaje = document.getElementById("titulo-mensaje");
+        let parrafo = document.getElementById("parrafo");
+        let muñeco = document.getElementById("muñeco");
+
+        let textoCifrado = texto
+          .replace(/enter/gi, "e")
+          .replace(/imes/gi, "i")
+          .replace(/ai/gi, "a")
+          .replace(/ober/gi, "o")
+          .replace(/ufat/gi, "u");
+
+        if (texto.length != 0) {
+          document.getElementById("texto").value = textoCifrado;
+          tituloMensaje.textContent = "Texto desencriptado con éxito";
+          parrafo.textContent = "";
+          muñeco.src = "./src/Imágenes/muñeco.png";
+        } else {
+          muñeco.src = "./src/Imágenes/muñeco.png";
+          tituloMensaje.textContent = "Ningún mensaje fue encontrado";
+          parrafo.textContent = "Ingresa el texto que deseas encriptar o desencriptar";
+          swal("Ooops!", "Debes ingresar un texto", "warning");
+        }
+      }
+    </script>
+  </body>
 </html>
